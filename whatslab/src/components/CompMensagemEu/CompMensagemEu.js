@@ -5,25 +5,25 @@ const MsgRow = styled.div`
     box-sizing: border-box;
     padding: 20px 15px 0 15px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
 `
 
 const MsgBox = styled.div`
     border-radius: 5px;
     max-width: 80%;
     padding: 5px;
-    background-color: white;
+    background-color: rgb(220,248,198);
     box-shadow: 0 2px 1px rgb(200,200,200);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 `
 
-const MsgUser = styled.p`
-    font-weight: bold;
-    margin: 5px 8px 0 8px;
-    text-align: left;
-`
+// const MsgUser = styled.p`
+//     font-weight: bold;
+//     margin: 5px 8px 0 8px;
+//     text-align: left;
+// `
 
 const MsgMsg = styled.p`
     margin: 5px 8px;
@@ -31,14 +31,14 @@ const MsgMsg = styled.p`
 `
 
 
-export class CompMensagem extends React.Component {
+export class CompMensagemEu extends React.Component {
     render() {
         let impressao
         if (this.props.nomeUser !== '' && this.props.mensagem !== '') {
             impressao = 
                 <MsgRow>
                     <MsgBox>
-                        <MsgUser>{this.props.nomeUser}</MsgUser>
+                        {/* <MsgUser>{this.props.nomeUser}</MsgUser> */}
                         <MsgMsg>{this.props.mensagem}</MsgMsg>
                     </MsgBox>
                 </MsgRow>
@@ -46,9 +46,7 @@ export class CompMensagem extends React.Component {
             impressao = <div></div>
         }
 
-        return (
-            impressao
-        )
+        return (impressao)
     }
 
 
