@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Formulario } from './components/Formulario/Formulario';
+import { CompMensagem } from '../CompMensagem/CompMensagem'
+
 
 const TelaPrincipal = styled.div`
     border: 1px solid black;
@@ -11,13 +13,14 @@ const TelaPrincipal = styled.div`
 `
 
 export class ComponenteTela extends React.Component {
-
     render() {
         return(
         <TelaPrincipal>
-        <Formulario>
-            
-        </Formulario>
+            <CompMensagem
+                nomeUser = {'raphael'}
+                mensagem = {'Mensagem de teste'}
+            />
+            <Formulario />
         </TelaPrincipal>
         )
     }
