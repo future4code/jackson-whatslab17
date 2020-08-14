@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Formulario } from './components/Formulario/Formulario';
-import { CompMensagem } from '../CompMensagem/CompMensagem'
+import { Formulario } from '../Formulario/Formulario';
+import { CompMensagem } from '../CompMensagem/CompMensagem';
 
 
 const TelaPrincipal = styled.div`

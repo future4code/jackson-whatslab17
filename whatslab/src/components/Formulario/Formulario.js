@@ -30,7 +30,6 @@ export class Formulario extends React.Component {
       };  
 
     onChangeInputUsuario = (event) => {
-
         this.setState({ valorInputUsuario: event.target.value });
       };
 
@@ -51,20 +50,22 @@ export class Formulario extends React.Component {
 
           
            return (
-            <div>{listaDeBaloes}</div>
-                <div>
-                    <input
-                     value={this.state.valorInputUsuario}
-                     onChange={this.onChangeInputUsuario}
-                     placeholder={"Usuário"}
-                    />
-                    <input
-                     value={this.state.valorInputMensagem}
-                     onChange={this.onChangeInputMensagem}
-                     placeholder={"Mensagem"}
-                    />
-                    <button onClick={this.adicionaBalao}>Enviar</button>
-                </div>
+            <div>
+              <div>{listaDeBaloes}</div>
+              <div>
+                  <input
+                    value={this.state.valorInputUsuario}
+                    onChange={this.onChangeInputUsuario}
+                    placeholder={"Usuário"}
+                  />
+                  <input
+                    value={this.state.valorInputMensagem}
+                    onChange={this.onChangeInputMensagem}
+                    placeholder={"Mensagem"}
+                  />
+                  <button onClick={this.adicionaBalao}>Enviar</button>
+              </div>
+            </div>
      );
   }
 }
