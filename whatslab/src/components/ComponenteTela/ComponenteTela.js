@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { Formulario } from './components/Formulario/Formulario';
 
 const TelaPrincipal = styled.div`
     border: 1px solid black;
@@ -14,7 +15,9 @@ export class ComponenteTela extends React.Component {
     render() {
         return(
         <TelaPrincipal>
-
+        <Formulario>
+            
+        </Formulario>
         </TelaPrincipal>
         )
     }
