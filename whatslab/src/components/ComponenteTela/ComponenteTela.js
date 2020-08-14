@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-
+import React from 'react';
+import styled from 'styled-components';
+import { Formulario } from './components/Formulario/Formulario';
 import { CompMensagem } from '../CompMensagem/CompMensagem'
 
 
@@ -20,6 +20,7 @@ export class ComponenteTela extends React.Component {
                 nomeUser = {'raphael'}
                 mensagem = {'Mensagem de teste'}
             />
+            <Formulario />
         </TelaPrincipal>
         )
     }
