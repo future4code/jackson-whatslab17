@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const MsgRow = styled.div`
     box-sizing: border-box;
-    padding: 20px 15px 0 15px;
+    padding: 0 15px 20px 15px;
     display: flex;
     justify-content: flex-start;
 `
@@ -14,9 +14,6 @@ const MsgBox = styled.div`
     padding: 5px;
     background-color: white;
     box-shadow: 0 2px 1px rgb(200,200,200);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 `
 
 const MsgUser = styled.p`
@@ -28,6 +25,7 @@ const MsgUser = styled.p`
 const MsgMsg = styled.p`
     margin: 5px 8px;
     text-align: left;
+    word-wrap: break-word;
 `
 
 
@@ -37,7 +35,7 @@ export class CompMensagem extends React.Component {
         if (this.props.nomeUser !== '' && this.props.mensagem !== '') {
             impressao = 
                 <MsgRow>
-                    <MsgBox>
+                    <MsgBox onDoubleClick={this.props.doubleClickFunc}>
                         <MsgUser>{this.props.nomeUser}</MsgUser>
                         <MsgMsg>{this.props.mensagem}</MsgMsg>
                     </MsgBox>
@@ -50,6 +48,4 @@ export class CompMensagem extends React.Component {
             impressao
         )
     }
-
-
 }

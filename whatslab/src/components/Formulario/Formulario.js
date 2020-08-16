@@ -5,11 +5,15 @@ import { CompMensagemEu } from '../CompMensagemEu/CompMensagemEu';
 
 
 const FormDiv = styled.div`
-
+    max-height: 100%;
 `
 
 const ListaBaloes = styled.div`
-  margin: 0 0 30px 0;
+  margin: 0 0 20px 0;
+  padding: 20px 0 0 0;
+  max-height: calc(100vh - 97px);
+  overflow: auto;
+  overflow-x:hidden;
 `
 
 const FormStyle = styled.div`
@@ -29,12 +33,13 @@ const FormUsuario = styled.input`
 `
 const FormMsg = styled.input`
     margin-right: 20px;
-    padding: 0 0 0 5px;
+    padding: 0 5px;
     width: 250px;
     border: none;
     border-radius: 7px;
     box-shadow: 0 2px 1px rgb(200,200,200);
     outline: none;
+    word-wrap: break-word;
 `
 
 const Button = styled.button`
@@ -56,69 +61,92 @@ export class Formulario extends React.Component {
     formulario: [],
     valorInputUsuario: "",
     valorInputMensagem: "",
+    mensagemID: 0,
   };
 
     adicionaBalao = () => {
-      if (this.state.valorInputUsuario !== '' && this.state.valorInputMensagem !== '') {
-          const novaMensagem = {
-              usuario: this.state.valorInputUsuario,
-              mensagem: this.state.valorInputMensagem
-          }
-          const novoMensagens = [...this.state.formulario, novaMensagem];
-          this.setState({ formulario: novoMensagens, valorInputUsuario:'', valorInputMensagem:''})
-      }
-    };  
+        if (this.state.valorInputUsuario !== '' && this.state.valorInputMensagem !== '') {
+            this.setState({mensagemID: this.state.mensagemID + 1})
+            const novaMensagem = {
+                id: this.state.mensagemID,
+                usuario: this.state.valorInputUsuario,
+                mensagem: `${this.state.valorInputMensagem}`
+            }
+            const novoMensagens = [...this.state.formulario, novaMensagem]
+            this.setState({ formulario: novoMensagens, valorInputUsuario:'', valorInputMensagem:''})
+        }
+    }
 
       
     onChangeInputUsuario = (event) => {
-        console.log(event.key)
         this.setState({ valorInputUsuario: event.target.value });
-      };
+    };
 
     onChangeInputMensagem = (event) => {
         this.setState({ valorInputMensagem: event.target.value });
-      };
+    };
 
-    
-      render() {
-          let listaDeBaloes
-          if (this.state.formulario.length > 0) {
-              listaDeBaloes = this.state.formulario.map((formulario) => {
-                  let compMensagemTemp
-                  if (formulario.usuario === 'eu') {
-                      compMensagemTemp = 
-                          <CompMensagemEu
-                              nomeUser={formulario.usuario}
-                              mensagem = {formulario.mensagem}
-                          />
-                  } else {
-                      compMensagemTemp = 
-                          <CompMensagem
-                              nomeUser={formulario.usuario}
-                              mensagem = {formulario.mensagem}
-                          />
-                  }
-                  return (compMensagemTemp);
-              });
-          }
-          
-          return (
-              <FormDiv>
-                  <ListaBaloes>{listaDeBaloes}</ListaBaloes>
-                  <FormStyle>
-                      <FormUsuario
-                        value={this.state.valorInputUsuario}
-                        onChange={this.onChangeInputUsuario}
-                        placeholder={"Usuário"}
-                      />
-                      <FormMsg
-                        value={this.state.valorInputMensagem}
-                        onChange={this.onChangeInputMensagem}
-                        placeholder={"Mensagem"}
-                      />
-                      <Button onClick={this.adicionaBalao}>Enviar</Button>
-                  </FormStyle>
-              </FormDiv>  
-          );
-  }
+    onKeyDownForm = (event) => {
+        if (event.key === `Enter`) {
+            console.log(`msg key: ${event.key}`)
+            this.adicionaBalao()
+        }
+    }
+
+    onDoubleClickDelete = (id) => {
+        const novoFormulario = this.state.formulario.filter(msgbox =>{
+            if (msgbox.id === id) {
+                return false
+            } else {
+                return true
+            }
+        })
+
+        this.setState({ formulario: novoFormulario })
+        console.log(`mensagem (id:${id}) apagada`)
+    }
+
+    render() {
+        let listaDeBaloes
+        if (this.state.formulario.length > 0) {
+            listaDeBaloes = this.state.formulario.map((formulario) => {
+                let compMensagemTemp
+                if (formulario.usuario === 'eu') {
+                    compMensagemTemp = 
+                        <CompMensagemEu
+                            nomeUser={formulario.usuario}
+                            mensagem = {formulario.mensagem}
+                            doubleClickFunc = {() => this.onDoubleClickDelete(formulario.id)}
+                        />
+                } else {
+                    compMensagemTemp = 
+                        <CompMensagem
+                            nomeUser={formulario.usuario}
+                            mensagem = {formulario.mensagem}
+                            doubleClickFunc = {() => this.onDoubleClickDelete(formulario.id)}
+                        />
+                }
+                return (compMensagemTemp);
+            });
+        }
+        
+        return (
+            <FormDiv>
+                <ListaBaloes>{listaDeBaloes}</ListaBaloes>
+                <FormStyle onKeyDown={this.onKeyDownForm}>
+                    <FormUsuario
+                    value={this.state.valorInputUsuario}
+                    onChange={this.onChangeInputUsuario}
+                    placeholder={"Usuário"}
+                    />
+                    <FormMsg
+                    value={this.state.valorInputMensagem}
+                    onChange={this.onChangeInputMensagem}
+                    placeholder={"Mensagem"}
+                    />
+                    <Button onClick={this.adicionaBalao}>Enviar</Button>
+                </FormStyle>
+            </FormDiv>  
+        );
+    }
 }

@@ -20,7 +20,7 @@ export class ComponenteTela extends React.Component {
     render() {
         return(
             <TelaPrincipal>
-                <Formulario />
+                <Formulario/>
             </TelaPrincipal>
         )
     }
