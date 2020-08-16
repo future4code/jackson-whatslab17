@@ -6,9 +6,7 @@ import { ComponenteTela } from './components/ComponenteTela/ComponenteTela.js';
 function App() {
   return (
     <div className="App">
-        <ComponenteTela>
-
-        </ComponenteTela>
+        <ComponenteTela></ComponenteTela>
     </div>
   )
 }
